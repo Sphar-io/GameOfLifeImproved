@@ -1,3 +1,4 @@
--Port HTML into Bootstrap
+-Port HTML into Bootstrap*
 -Add pattern Generation
 -Add user drawing
+-add navigation back to home
