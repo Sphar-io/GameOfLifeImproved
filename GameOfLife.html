@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Game of Life</title>
+	<script type="text/javascript" src="dat.gui.min.js"></script>
+	<script type='text/javascript' src='betterGol.js'></script>
+	<script type="text/javascript" src='draw.js'></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<style type="text/css">	
+		body{
+			background-color: #6C7A89;
+			margin-top: 10px;
+			margin-bottom: 20px;
+		}
+		html {
+			position: relative;
+			min-height: 100%;
+		}
+		#canvasA{
+			display: block;
+			margin: 0px auto;
+			width: 90vh;
+			height: 90vh;
+			box-shadow: 10px 10px 50px #888888;
+			background: white;
+		}
+		.darkWell{
+			background: #2C3E50;
+			color: white;
+		}
+		.footer {
+		  position: absolute;
+		  bottom: 0px;
+		  width: 100%;
+		  background-color: #222;
+		  height: 30px;
+		}
+		select{
+			color: black;
+		}
+		input[type="text"]{
+			font:13px arial;
+		}
+	</style>
+</head>
+<body>
+<div class="container">
+<div class="well text-center">
+	<H1 class="text-center">Game of Life Simulator</H1>
+	<p><b>Instructions:</b><br>
+	Use H to show and hide control panel. P pauses and upauses. Adjust level of random fill or select an example pattern <br>
+	Use controls to pause, play, step, or regenerate the game board. Click and drag with mouse to draw cells</p>
+	<div class="row">
+		<div class="col-xs-12">
+			<canvas id="canvasA"></canvas>
+		</div>
+	</div>
+<br>
+<p class="muted">Written using Javacript and dat.gui by Jonathan Sphar</p>
+</div>
+</div>
+<footer class="footer navbar-fixed-bottom">
+     <div class="container text-center">
+     <p class="text-muted text">&copy; Jonathan Sphar 2016</p>
+     </div>
+</footer>
+</body>
+</html>
