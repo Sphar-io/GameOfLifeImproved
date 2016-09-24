@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Improved Game of Life</title>
+
+	<script type="text/javascript" src="dat.gui.min.js"></script>
+	<script type='text/javascript' src='betterGol.js'></script>
+	<script type="text/javascript" src='draw.js'></script>
+
+	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+	<style type="text/css">
+		#canvasA{
+			display: block;
+			margin: 0px auto;
+			width: 90vh;
+			height: 90vh;
+			box-shadow: 10px 10px 50px #888888;
+		}
+		.header{
+			text-align: center;
+			font-size: 30px;
+			font-weight: bold;
+		}
+		.regText{
+			text-align: center;
+		}
+		body{
+			font-family: 'Roboto', sans-serif;
+		}
+	</style>
+</head>
+<body>
+	<div class="header">
+		<p>Conway's Game of Life Simulator</p>
+	</div>
+	<canvas id="canvasA"></canvas>
+<div class="regText">
+	<p>Instructions:</p>
+	<p>Use H to show and hide control panel. P pauses and upauses. Adjust level of random fill or select an example pattern</p>
+	<p>Use controls to pause, play, step, or regenerate the game board. Click and drag with mouse to draw cells</p>
+	<p>Written in Javascript by Jonathan Sphar</p>
+</div>
+</body>
+</html>
