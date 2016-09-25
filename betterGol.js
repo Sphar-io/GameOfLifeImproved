@@ -7,7 +7,7 @@ function load(){
 		ctx = canvas.getContext("2d");
 		canvas.width = Math.floor(.90*window.innerHeight);
 		canvas.height = Math.floor(.90*window.innerHeight);
-		gamePaused=true;
+		gamePaused=false;
 		curGen = 0;
 }
 

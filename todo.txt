@@ -2,3 +2,5 @@
 -Add pattern Generation
 -Add user drawing
 -add navigation back to home
+-Add framerate counter
+-Add side wrapping
