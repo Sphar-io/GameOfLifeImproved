@@ -1,8 +1,8 @@
-
 document.addEventListener('DOMContentLoaded', function() {
 	load();
 }, false);
 
+var mouseDown=false;
 
 //creates objects for gui
 function defaultValObj(){
@@ -112,7 +112,28 @@ function draw(){
 	ctx.putImageData(canvasData,0,0);
 }
 
+//add event handlers
+//canvas.addEventListener("mousemove", getPosition, false);
+//canvas.addEventListener("mousedown", dragChange, false);
+//canvas.addEventListener("mouseup", dragChange, false);
+//document.addEventListener("keydown", keypressCheck, false);
 
+function dragChange(event){
+	mouseDown != mouseDown;
+	gamePaused = true;
+}
+
+function getPosition(){
+	var x = event.pageX;
+	var y = event.pageY;
+	x -= canvas.offsetLeft;
+	y -= canvas.offsetTop;
+	if(mousedown){ //check if the mouse is down
+		if (x < width && y < height){ //check if over canvas
+			curGen[x][y] = 1 - curGen[x][y] //flip cell position (either 1-0 = 1 or 1-1 = 0)
+		}
+	}
+}
 
 //game step function
 function update() {
