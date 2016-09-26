@@ -54,7 +54,9 @@ function golStep(){
 	}
 
 		//swaps current to nextGen
-		curGen = nextGen;
+		var temp = curGen.slice(0);
+		curGen = nextGen.slice(0);
+		nextGen = curGen.slice(0);
 }
 
 function checksLive(numNeighbors, curCell){
