@@ -98,11 +98,6 @@ function stepGame(){
 }
 
 function draw(){
-	if(stepCount%2==0){
-		nextGen = curGen;
-	}else{
-		curGen = nextGen;
-	}
 	for (var i = 0; i < curGen.length; i++) {
 		for (var j = 0; j < curGen[i].length; j++) {
 			var index = ((canvas.width*j+i)*4);

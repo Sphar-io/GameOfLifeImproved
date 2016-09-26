@@ -52,6 +52,9 @@ function golStep(){
 			nextGen[i][j] = checksLive(numNeighbors, curCell);		
 		}
 	}
+	var temp = curGen;
+	curGen = nextGen;
+	nextGen = temp;
 }
 
 function checksLive(numNeighbors, curCell){
