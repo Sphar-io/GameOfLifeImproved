@@ -3,6 +3,18 @@ document.addEventListener('DOMContentLoaded', function() {
 }, false);
 
 var mouseDown=false;
+var lastX = 0;
+var lastY = 0;
+var curX;
+var curY;
+
+function initListeners() {
+	//add event handlers
+	canvas.addEventListener("mousemove", getPosition, false);
+	canvas.addEventListener("mousedown", dragChange, false);
+	canvas.addEventListener("mouseup", dragChange, false);
+	document.addEventListener("keydown", keypressCheck, false);
+}
 
 //creates objects for gui
 function defaultValObj(){
@@ -17,6 +29,7 @@ function defaultValObj(){
 	gameModeChange(this.gameMode);
 	gameSizeChange(this.gameSize);
 	initializeGrid();
+	initListeners();
 }
 
 function generatePatterns(){
@@ -112,28 +125,64 @@ function draw(){
 	ctx.putImageData(canvasData,0,0);
 }
 
-//add event handlers
-//canvas.addEventListener("mousemove", getPosition, false);
-//canvas.addEventListener("mousedown", dragChange, false);
-//canvas.addEventListener("mouseup", dragChange, false);
-//document.addEventListener("keydown", keypressCheck, false);
-
 function dragChange(event){
-	mouseDown != mouseDown;
+	console.log("MouseDown: " + mouseDown);
+	mouseDown = !	mouseDown;
 	gamePaused = true;
 }
 
-function getPosition(){
-	var x = event.pageX;
-	var y = event.pageY;
-	x -= canvas.offsetLeft;
-	y -= canvas.offsetTop;
-	if(mousedown){ //check if the mouse is down
-		if (x < width && y < height){ //check if over canvas
-			curGen[x][y] = 1 - curGen[x][y] //flip cell position (either 1-0 = 1 or 1-1 = 0)
+function getPosition(event){
+	var rect = canvas.getBoundingClientRect();
+	curX = Math.floor(event.clientX - rect.left);
+  	curY = Math.floor(event.clientY - rect.top);
+	if(mouseDown){ //check if the mouse is down
+		if (curX < width && curY < height){
+			drawLine();
 		}
 	}
+	lastX = curX;
+	lastY = curY;
 }
+function keypressCheck(event){
+	if(event.which == 80) { //space bar
+		pauseGame ();
+	}
+}
+
+//bresenham line formula
+  function drawLine () {
+    // Translate coordinates
+    var x1 = curX;
+    var y1 = curY;
+    var x2 = lastX;
+    var y2 = lastY;
+
+    // Define differences and error check
+    var dx = Math.abs(x2 - x1);
+    var dy = Math.abs(y2 - y1);
+    var sx = (x1 < x2) ? 1 : -1;
+    var sy = (y1 < y2) ? 1 : -1;
+    var err = dx - dy;
+
+    // Main loop
+    while (!((x1 == x2) && (y1 == y2))) {
+      var e2 = err << 1;
+      if (e2 > -dy) {
+        err -= dy;
+        x1 += sx;
+      }
+      if (e2 < dx) {
+        err += dx;
+        y1 += sy;
+      }
+      // Set coordinates
+      curGen[x1][y1] = 1;
+    }
+    draw();
+}
+
+
+
 
 //game step function
 function update() {
