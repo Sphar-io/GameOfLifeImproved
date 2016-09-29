@@ -7,6 +7,7 @@ var lastX = 0;
 var lastY = 0;
 var curX;
 var curY;
+var gui;
 
 function initListeners() {
 	//add event handlers
@@ -25,7 +26,6 @@ function defaultValObj(){
 	this.clearGame = function(){clearGame();};
 	this.gameMode = 'Original';
 	this.gameSize = 75;
-	this.acorn = function(){};
 	//initializes game
 	regenerateGame();
 	randomFillChange(this.randomFill);
@@ -36,9 +36,11 @@ function defaultValObj(){
 }
 
 function generatePatterns(){
-	this.acorn = function(){};
+	this.acorn = function(){acorn();};
+	this.gosperGliderGun = function(){gosperGliderGun();};
+	this.spaceShip = function(){spaceShip();};
 }
-var gui;
+
 //creates gui items
 window.onload = function() {
 	//create objects for gui
@@ -54,6 +56,8 @@ window.onload = function() {
 		//subfolder for patterns
 		var f1s1 = f1.addFolder('Example Patterns');
 			f1s1.add(patterns, 'acorn');
+			f1s1.add(patterns, 'gosperGliderGun');
+			f1s1.add(patterns, 'spaceShip');
 	//folder for controls
 	var f2 = gui.addFolder('Controls');
 		f2.add(menu, 'pause');
