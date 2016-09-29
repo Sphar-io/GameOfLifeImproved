@@ -11,8 +11,8 @@ var curY;
 function initListeners() {
 	//add event handlers
 	canvas.addEventListener("mousemove", getPosition, false);
-	canvas.addEventListener("mousedown", dragChange, false);
-	canvas.addEventListener("mouseup", dragChange, false);
+	canvas.addEventListener("mousedown", clickDown, false);
+	canvas.addEventListener("mouseup", clickUp, false);
 	document.addEventListener("keydown", keypressCheck, false);
 }
 
@@ -22,8 +22,11 @@ function defaultValObj(){
 	this.pause = function(){pauseGame();};
 	this.regenerate = function(){regenerateGame();};
 	this.stepAnimation = function(){stepGame();};
+	this.clearGame = function(){clearGame();};
 	this.gameMode = 'Original';
 	this.gameSize = 75;
+	this.acorn = function(){};
+	//initializes game
 	regenerateGame();
 	randomFillChange(this.randomFill);
 	gameModeChange(this.gameMode);
@@ -56,6 +59,7 @@ window.onload = function() {
 		f2.add(menu, 'pause');
 		f2.add(menu, 'regenerate');
 		f2.add(menu, 'stepAnimation');
+		f2.add(menu, 'clearGame');
 	//end adding to gui
 
 
@@ -73,6 +77,15 @@ function gameModeChange(value){
 	gameMode = value;
 	fillRandom(); //re-initializes
 	draw();
+}
+
+function clearGame(){
+	stepCount = 0;
+	var tempFill = fillAmount;
+	fillAmount = 0;
+	fillRandom();
+	draw();
+	fillAmount = tempFill;
 }
 
 function randomFillChange(value){
@@ -125,10 +138,14 @@ function draw(){
 	ctx.putImageData(canvasData,0,0);
 }
 
-function dragChange(event){
-	console.log("MouseDown: " + mouseDown);
-	mouseDown = !	mouseDown;
+function clickDown(event){
+	mouseDown = !mouseDown;
 	gamePaused = true;
+}
+
+function clickUp(event){
+	mouseDown = !mouseDown;
+	gamePaused = false;
 }
 
 function getPosition(event){
@@ -136,7 +153,7 @@ function getPosition(event){
 	curX = Math.floor(event.clientX - rect.left);
   	curY = Math.floor(event.clientY - rect.top);
 	if(mouseDown){ //check if the mouse is down
-		if (curX < width && curY < height){
+		if (curX < (width) && curY < (height)){
 			drawLine();
 		}
 	}
