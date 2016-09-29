@@ -4,6 +4,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
 var mouseDown=false;
 
+function initListeners() {
+	//add event handlers
+	canvas.addEventListener("mousemove", getPosition, false);
+	canvas.addEventListener("mousedown", dragChange, false);
+	canvas.addEventListener("mouseup", dragChange, false);
+	//document.addEventListener("keydown", keypressCheck, false);
+}
+
 //creates objects for gui
 function defaultValObj(){
 	this.randomFill = 75;
@@ -17,6 +25,7 @@ function defaultValObj(){
 	gameModeChange(this.gameMode);
 	gameSizeChange(this.gameSize);
 	initializeGrid();
+	initListeners();
 }
 
 function generatePatterns(){
@@ -112,25 +121,22 @@ function draw(){
 	ctx.putImageData(canvasData,0,0);
 }
 
-//add event handlers
-//canvas.addEventListener("mousemove", getPosition, false);
-//canvas.addEventListener("mousedown", dragChange, false);
-//canvas.addEventListener("mouseup", dragChange, false);
-//document.addEventListener("keydown", keypressCheck, false);
-
 function dragChange(event){
-	mouseDown != mouseDown;
+	console.log("MouseDown: " + mouseDown);
+	mouseDown = !	mouseDown;
 	gamePaused = true;
 }
 
-function getPosition(){
-	var x = event.pageX;
-	var y = event.pageY;
-	x -= canvas.offsetLeft;
-	y -= canvas.offsetTop;
-	if(mousedown){ //check if the mouse is down
-		if (x < width && y < height){ //check if over canvas
+function getPosition(event){
+	var rect = canvas.getBoundingClientRect();
+	var x = Math.floor(event.clientX - rect.left);
+  	var y = Math.floor(event.clientY - rect.top);
+	console.log("Get position");
+	if(mouseDown){ //check if the mouse is down
+		if (x < width && y < height){
+			console.log("Drawing cell at: " + x + ","+ y); //check if over canvas
 			curGen[x][y] = 1 - curGen[x][y] //flip cell position (either 1-0 = 1 or 1-1 = 0)
+			draw();
 		}
 	}
 }
